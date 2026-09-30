@@ -22,22 +22,22 @@ def show_applications():
 def view_application():
     print('========Application Form=========')
     for application in applications:
-        print(application['Company'])
-        print(application['Position'])
-        print(application['Location'])
-        print(application['Status'])
-        print(application['Hourly Salary'])
+        print('Company Name:', application['Company'])
+        print('Position:', application['Position'])
+        print('Location:', application['Location'])
+        print('Status:', application['Status'])
+        print('Salary:', application['Hourly Salary'], 'per hour')
         if application['Hourly Salary'] <= 23:
             print("Low Salaray")
         elif application['Hourly Salary'] > 23 and application['Hourly Salary'] < 25:
             print('Average Wage')
         else:
             print('High Salary')
-        if Remote == 'yes':
+        if application["Remote:"] == "yes":
             print('This Position is remote')
-        elif Remote == 'no':
+        elif application["Remote:"] == 'no':
             print('This position is in-person')
-        elif Remote == 'hybrid':
+        elif application['Remote:'] ==  'hybrid':
             print('This position is both remote and in-person')
         else:
             print('Error...')
