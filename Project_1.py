@@ -1,3 +1,4 @@
+#Function for New Application, using dictionary to save the applications
 applications = []
 def show_applications():
     Company_name = input('Company Name:')
@@ -28,11 +29,11 @@ def view_application():
         print('Status:', application['Status'])
         print('Salary:', application['Hourly Salary'], 'per hour')
         if application['Hourly Salary'] <= 23:
-            print("Low Salaray")
+            print("Salary Status: Low Salaray")
         elif application['Hourly Salary'] > 23 and application['Hourly Salary'] < 25:
-            print('Average Wage')
+            print('Salary Status: Average Wage')
         else:
-            print('High Salary')
+            print('Salary Status: High Salary')
         if application["Remote:"] == "yes":
             print('This Position is remote')
         elif application["Remote:"] == 'no':
@@ -42,6 +43,23 @@ def view_application():
         else:
             print('Error...')
         print('=================================')
+
+#Function to update company status
+def new_status():
+    found = False
+    company = input('Enter company name or type Exit to go back:')
+    if company.strip().lower() == 'exit':
+        return
+    for application in applications:
+        if company.strip().lower() == application["Company"].strip().lower():
+            update_status = input('Enter new status:')
+            application['Status'] = update_status
+            found = True
+            break
+    if found == False:
+        print('Company not found, Please try again.')
+        return new_status()
+#Function for application Menu
 def show_menu():
     print('1.Add Application')
     print('2.View Application')
@@ -58,7 +76,9 @@ while True:
         show_applications()
     elif User_choice== 2:
         view_application()
+    elif User_choice == 3:
+        new_status()
     elif User_choice == 7:
         break
     else:
-        print('Invalid Input')
+        print('Invalid Input, Please try again')
