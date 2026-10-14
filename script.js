@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LockdIn Tutoring - Core Application Logic
+   Apex Academy - Core Application Logic
    Dynamic rendering, filter engine, cost calculator, and LocalStorage management
    ========================================================================== */
 
@@ -130,7 +130,7 @@ const TUTORS_DATA = [
 // --- Initial Demo Bookings Seed ---
 const DEFAULT_BOOKINGS = [
     {
-        id: 'lockdin-' + Date.now(),
+        id: 'apex-' + Date.now(),
         studentName: 'Alex Rivera',
         parentEmail: 'm.rivera@example.com',
         phoneNum: '(555) 234-5678',
@@ -202,25 +202,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- LocalStorage Management ---
 function initLocalStorage() {
-    // Migrate legacy key if present
-    if (localStorage.getItem('brightpath_bookings') && !localStorage.getItem('lockdin_bookings')) {
-        localStorage.setItem('lockdin_bookings', localStorage.getItem('brightpath_bookings'));
-    }
-    if (!localStorage.getItem('lockdin_bookings')) {
-        localStorage.setItem('lockdin_bookings', JSON.stringify(DEFAULT_BOOKINGS));
+    // Migrate legacy keys if present
+    if (!localStorage.getItem('apex_academy_bookings')) {
+        const legacyData = localStorage.getItem('lockdin_bookings') || localStorage.getItem('brightpath_bookings');
+        if (legacyData) {
+            localStorage.setItem('apex_academy_bookings', legacyData);
+        } else {
+            localStorage.setItem('apex_academy_bookings', JSON.stringify(DEFAULT_BOOKINGS));
+        }
     }
 }
 
 function getStoredBookings() {
     try {
-        return JSON.parse(localStorage.getItem('lockdin_bookings')) || [];
+        return JSON.parse(localStorage.getItem('apex_academy_bookings')) || [];
     } catch (e) {
         return [];
     }
 }
 
 function saveBookings(bookings) {
-    localStorage.setItem('lockdin_bookings', JSON.stringify(bookings));
+    localStorage.setItem('apex_academy_bookings', JSON.stringify(bookings));
     updateBookingsBadge();
 }
 
@@ -492,7 +494,7 @@ function handleBookingSubmit(e) {
     }
 
     const newBooking = {
-        id: 'lockdin-' + Date.now(),
+        id: 'apex-' + Date.now(),
         studentName,
         parentEmail,
         phoneNum,
@@ -512,7 +514,7 @@ function handleBookingSubmit(e) {
     bookingForm.reset();
     closeAllModals();
 
-    showToast(`🎉 Free trial booked for ${studentName}! You're LockdIn.`, true);
+    showToast(`🎉 Free trial booked for ${studentName}! Welcome to Apex Academy.`, true);
 }
 
 // --- Bookings Drawer List Rendering ---

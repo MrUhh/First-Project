@@ -1,4 +1,4 @@
-# LockdIn - Academic Excellence Platform
+# Apex Academy - Academic Excellence Platform
 
 A modern, responsive, standalone 1-on-1 tutoring web application built with semantic HTML5, modern CSS, and vanilla JavaScript with browser `localStorage` persistence.
 
